@@ -1,2 +1,2 @@
 # Euler-Project-Problems
-My solutions to the Euler Project problems
+My daily solutions to the Euler Project problems
