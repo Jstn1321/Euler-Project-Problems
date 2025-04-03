@@ -33,9 +33,9 @@ bool isPrime(int n){
 
     while (true){
         r = 2;
-        int k = 1;
+        int k = pow(log2(n), 2);
         while (coprime(n, r) == 1){
-            if ((int(pow(n, k)) % r) == 1 && k > pow(log2(n), 2)){
+            if ((int(pow(n, k)) % r) == 1){
                 goto end_loops;
             }
             k++;
