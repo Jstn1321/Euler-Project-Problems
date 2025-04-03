@@ -15,7 +15,7 @@ int coprime(int a, int b){
 bool isPrime(int n){
     //Step 1: Determine if n is a perfect power, if so it is a composite
     double power{0.0};
-    int r{0};
+    int r{2};
     bool isPrime = true;
     for (int i = 2; i <= log2(n); i++){
         power = pow(n, 1.0/i);
@@ -32,10 +32,9 @@ bool isPrime(int n){
     }
 
     while (true){
-        r = 2;
-        int k = pow(log2(n), 2);
+        int k = pow(log2(n), 2.0);
         while (coprime(n, r) == 1){
-            if ((int(pow(n, k)) % r) == 1){
+            if ((int(pow(n, k)) % r) == 1 && k > pow(log2(n), 2.0)){
                 goto end_loops;
             }
             k++;
