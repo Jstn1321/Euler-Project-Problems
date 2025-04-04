@@ -1,96 +1,70 @@
 #include <math.h>
 #include <iostream>
 #include <list>
+#include <gmpxx.h>
 
-std::list<unsigned long long> coeffOfPascal(unsigned long long n){
-
-    std::list<unsigned long long> coeffHalf = {1, n};
-    std::list<unsigned long long> coeffLastHalf;
-
-    if (n == 2){
-        coeffHalf = {1 , 2, 1};
+mpz_class factorial(mpz_class n){
+    if (n == 1){
+        return 1;
     }
-
-    if (n == 3){
-        coeffHalf = {1 , 3, 3, 1};
+    else {
+        return n * factorial(n-1);
     }
-
-    if (n > 3){
-        coeffHalf = {1, n};
-
-        unsigned long long currCoeff = (n*(n-1))/2;
-        coeffHalf.push_back(currCoeff);
-
-        for (int i = 3; i <= ((int)(n)/2); i++){
-            currCoeff *= (n-i+1)/(double)i;
-            coeffHalf.push_back(currCoeff);
-        }
-
-        for (unsigned long long i : coeffHalf){
-            coeffLastHalf.push_back(i);
-        }
-        if (n % 2 != 1){
-            coeffLastHalf.pop_back();
-        }
-        coeffLastHalf.reverse();
-
-        for (unsigned long long i: coeffLastHalf){
-            coeffHalf.push_back(i);
-        }
-    }
-    return coeffHalf;
 }
 
-bool isPrime(int n){
+mpz_class coeffOfPascal(mpz_class row, mpz_class col){
+    // (row!)/((row-col)! * col!) 5040
+    mpz_class currCoeff = (factorial(row))/((factorial(row-col)) * factorial(col));
+
+    return currCoeff;
+}
+
+std::list<mpz_class> partialListCoeffOfPascal(mpz_class n, unsigned long long longn){
+    
+    std::list<mpz_class> coeff = {1, n};
+
+    for (mpz_class col = 2; col <= (int)longn/2; col++){
+        coeff.push_back(coeffOfPascal(n, col));
+    }
+
+    coeff.push_back(1);
+
+    return coeff;
+}
+
+bool isPrime(mpz_class n, long long longn){
     //Equation: (x-1)^p - (x^p - 1) 
     bool isPrime{true};
 
-    std::list<unsigned long long> coeffPrime;
-    int numReplace{0};
-    int last{0};
-    int sum{};
-
-    for (unsigned long long i : coeffOfPascal(n)){
-        coeffPrime.push_back(i);
+    std::list<mpz_class> halfCoeff = partialListCoeffOfPascal(n, longn);
+    halfCoeff.pop_back();
+    halfCoeff.pop_front();
+    if (longn % 2 == 0){
+        halfCoeff.push_back(2);
     }
 
-    if (n % 2 == 0){
-        last = 1;
-    } else {
-        last = -1;
-    }
-
-    numReplace = last + 1;
-    coeffPrime.back() = numReplace;
-
-    coeffPrime.pop_front();
-
-    if (coeffPrime.back() == 0){
-        coeffPrime.pop_back();
-    }
-
-    for (unsigned long long i: coeffPrime){
+    for (mpz_class i: halfCoeff){
+        std::cout << i << "\n";
         if (i % n != 0){
             isPrime = false;
             break;
         }
     }
 
-    for (unsigned long long i : coeffPrime){
-        std::cout << i << "\n";
-    }
-
     return isPrime;
 }
 
 int main(){
-    unsigned long long n = 101;
+    
+    long long longn = 51736;
+    mpz_class n = 51736;
 
-    if (isPrime(n) == 0){
+    if (isPrime(n, longn) == 0){
         std::cout << n << " is not a prime";
     }
     else {
         std::cout << n << " is a prime";
     }
+    
     return 0;
 }
