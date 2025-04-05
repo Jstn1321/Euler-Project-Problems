@@ -32,9 +32,9 @@ std::list<mpz_class> partialListCoeffOfPascal(mpz_class n, unsigned long long lo
     return coeff;
 }
 
-bool aksPrimality(mpz_class n, long long longn){
+bool pascalPrimality(mpz_class n, long long longn){
     //Equation: (x-1)^p - (x^p - 1) 
-    bool aksPrimality{true};
+    bool pascalPrimality{true};
 
     std::list<mpz_class> halfCoeff = partialListCoeffOfPascal(n, longn);
     halfCoeff.pop_back();
@@ -46,20 +46,20 @@ bool aksPrimality(mpz_class n, long long longn){
     for (mpz_class i: halfCoeff){
         std::cout << i << "\n";
         if (i % n != 0){
-            aksPrimality = false;
+            pascalPrimality = false;
             break;
         }
     }
 
-    return aksPrimality;
+    return pascalPrimality;
 }
 
 int main(){
     
-    long long longn = 51736;
-    mpz_class n = 51736;
+    long long longn = 517;
+    mpz_class n = 517;
 
-    if (aksPrimality(n, longn) == 0){
+    if (pascalPrimality(n, longn) == 0){
         std::cout << n << " is not a prime";
     }
     else {
