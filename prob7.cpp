@@ -62,7 +62,7 @@ int main(){
         if (isPrime(i,longi)){
             primeCount++;
             std::cout << longi << " " << primeCount << "\n";
-            if (primeCount == 1001){
+            if (primeCount == 10001){
                 break;
             }
         }
