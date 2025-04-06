@@ -8,8 +8,11 @@ int main(){
     unsigned long long max{0};
 
     for (int i = 0; i < 988; i++){
-        sum = i;
+        sum = std::stoi(bigNum.substr(i, 1));
         for (int j = i+1; j < i + 13; j++){
+            if(std::stoi(bigNum.substr(j, 1)) == 0){
+                break;
+            }
             sum *= std::stoi(bigNum.substr(j, 1));
         }
         std::cout << sum << "\n";
