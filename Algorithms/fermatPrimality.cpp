@@ -15,6 +15,7 @@ bool probablePrime(mpz_class n, unsigned long long longn){
     randNum = dist6(rng);
 
     for (int i = 0; i < 10; i++){
+        randNum = dist6(rng);
         exp = pow(randNum, longn - 1);
         if (exp % n != 1){
             isPrime = false;
@@ -25,5 +26,6 @@ bool probablePrime(mpz_class n, unsigned long long longn){
 }
 
 int main(){
+    std::cout << probablePrime(17,17);
     return 0;
 }
