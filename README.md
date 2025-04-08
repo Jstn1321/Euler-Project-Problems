@@ -1,2 +1,3 @@
 # Euler-Project-Problems
-My daily solutions to the Euler Project problems
+
+I try to do daily Project Euler problems but sometimes they take a couple days or I just try to code an algorithm.
