@@ -69,6 +69,13 @@
         "*.tcc": "cpp",
         "memory_resource": "cpp",
         "string_view": "cpp",
-        "text_encoding": "cpp"
+        "text_encoding": "cpp",
+        "chrono": "cpp",
+        "forward_list": "cpp",
+        "iomanip": "cpp",
+        "ratio": "cpp",
+        "sstream": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp"
     }
 }
