@@ -3,25 +3,28 @@
 #include <random>
 #include <gmpxx.h>
 #include <cstdlib>
-using namespace std;
 
 bool probablePrime(mpz_class n, unsigned long long longn){
     bool isPrime = true;
-    unsigned long long randNum{0};
+    mpz_class randNum{0};
     mpz_class exp{0};
+    mpz_class mod{0};
 
-    srand((unsigned) time(NULL));
+    std::random_device rd;  // a seed source for the random number engine
+    std::mt19937 gen(rd()); // mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<> distrib(2, longn-2);
 
-
-	randNum = (rand() * longn -1) + 2;
-    exp = pow(randNum, longn-1);
-    
     for (int i = 0; i < 10; i++){
-        randNum = rand();
-        exp = pow(randNum, longn - 1);
-        cout << exp << "\n";
-        if (exp % n != 1){
+        randNum = distrib(gen);
+        std::cout << randNum << "\n";
+        //exp = pow(randNum, longn - 1);
+        mpz_pow_ui(exp.get_mpz_t(), randNum.get_mpz_t(), longn-1);
+        std::cout << exp << "\n";
+        mod = exp % n;
+        //std::cout << mod << "\n";
+        if (mod != 1){
             isPrime = false;
+            break;
         }
     }
 
@@ -29,6 +32,6 @@ bool probablePrime(mpz_class n, unsigned long long longn){
 }
 
 int main(){
-    cout << probablePrime(7, 7);
+    std::cout << probablePrime(4099, 4099);
     return 0;
 }
