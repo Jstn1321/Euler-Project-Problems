@@ -2,21 +2,24 @@
 #include <math.h>
 #include <random>
 #include <gmpxx.h>
+#include <cstdlib>
+using namespace std;
 
 bool probablePrime(mpz_class n, unsigned long long longn){
     bool isPrime = true;
     unsigned long long randNum{0};
     mpz_class exp{0};
 
-    std::random_device dev;
-    std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> dist6(2,longn-2); // distribution in range [1, 6]
+    srand((unsigned) time(NULL));
 
-    randNum = dist6(rng);
 
+	randNum = (rand() * longn -1) + 2;
+    exp = pow(randNum, longn-1);
+    
     for (int i = 0; i < 10; i++){
-        randNum = dist6(rng);
+        randNum = rand();
         exp = pow(randNum, longn - 1);
+        cout << exp << "\n";
         if (exp % n != 1){
             isPrime = false;
         }
@@ -26,6 +29,6 @@ bool probablePrime(mpz_class n, unsigned long long longn){
 }
 
 int main(){
-    std::cout << probablePrime(17,17);
+    cout << probablePrime(7, 7);
     return 0;
 }
