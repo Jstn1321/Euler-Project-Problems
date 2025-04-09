@@ -14,7 +14,7 @@ bool probablePrime(mpz_class n, unsigned long long longn){
     std::mt19937 gen(rd()); // mersenne_twister_engine seeded with rd()
     std::uniform_int_distribution<> distrib(2, longn-2);
 
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < 3; i++){
         randNum = distrib(gen);
         //std::cout << randNum << "\n";
         //exp = pow(randNum, longn - 1);
@@ -32,16 +32,16 @@ bool probablePrime(mpz_class n, unsigned long long longn){
 }
 
 int main(){
-    mpz_class sum{2};
-    mpz_class mpzi{3};
+    mpz_class sum{5};
+    mpz_class mpzi{5};
 
-    for (long long i = 3; i < 10; i+=2){
-        std::cout << i << " " << sum << "\n";
+    for (long long i = 5; i < 2000000; i+=2){
+        std::cout << mpzi << " " << sum << "\n";
         if (probablePrime(mpzi, i) == 1){
             sum = sum + mpzi;
         }
-        mpzi++;
+        mpzi+=2;
     }
-
+    std::cout << sum;
     return 0;
 }
