@@ -3,21 +3,56 @@
 #include <iostream>
 #include <vector>
 
-int vertical(int matrix[20][20]){
-    unsigned long long max = 0;
+int horizontal(int matrix[20][20]){
+    long long max{0};
+    long long sum{1};
+
+    for (int i =0; i < 20; i++){
+        for (int k = 0; k < 17; k++){
+            sum = matrix[i][k];
+            for (int j = k +1; j < k + 4; j++){
+                //std::cout << matrix[i][j] << " " << matrix[i][k] << "\n";
+                sum *= matrix[i][j];
+            }
+			std::cout << sum << "\n";
+            if (sum > max){
+                max = sum;
+            }
+        }
+        
+    }
    
+   return max;
 }
 
-int horizontal(int matrix[20][20]){
+int vertical (int matrix[20][20]){
+	long long max{0};
+    long long sum{1};
 
+    for (int i =0; i < 20; i++){
+        for (int k = 0; k < 17; k++){
+            sum = matrix[k][i];
+            for (int j = k +1; j < k + 4; j++){
+                std::cout << matrix[k][j] << " " << matrix[k][i] << "\n";
+                sum *= matrix[k][j];
+            }
+			//std::cout << sum << "\n";
+            if (sum > max){
+                max = sum;
+            }
+        }
+        
+    }
+   
+   return max;
 }
 
 int diagonal (int matrix[20][20]){
-    
+    return 0;
 }
 
 int main(){
-    int matrix[20][20] = {
+    int eulerMatrix[20][20] = {
 		{ 8, 2,22,97,38,15, 0,40, 0,75, 4, 5, 7,78,52,12,50,77,91, 8},
 		{49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48, 4,56,62, 0},
 		{81,49,31,73,55,79,14,29,93,71,40,67,53,88,30, 3,49,13,36,65},
@@ -39,5 +74,8 @@ int main(){
 		{20,73,35,29,78,31,90, 1,74,31,49,71,48,86,81,16,23,57, 5,54},
 		{ 1,70,54,71,83,51,54,69,16,92,33,48,61,43,52, 1,89,19,67,48},
 	};
+
+    std::cout << vertical(eulerMatrix);
+
     return 0;
 }
