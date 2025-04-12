@@ -30,9 +30,9 @@ int vertical (int matrix[20][20]){
     long long sum{1};
 
     for (int i =0; i < 20; i++){
-        for (int k = 0; k < 17; k++){
-            sum = matrix[k][i];
-            for (int j = k +1; j < k + 4; j++){
+        for (int k = 0; k < 17; k++)
+            sum = matrix[i][k];
+            for (int j = k+1; j < k + 4; j++){
                 std::cout << matrix[k][j] << " " << matrix[k][i] << "\n";
                 sum *= matrix[k][j];
             }
