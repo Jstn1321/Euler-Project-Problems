@@ -29,20 +29,18 @@ int vertical (int matrix[20][20]){
 	long long max{0};
     long long sum{1};
 
-    for (int i =0; i < 20; i++){
-        for (int k = 0; k < 17; k++)
-            sum = matrix[i][k];
-            for (int j = k+1; j < k + 4; j++){
-                std::cout << matrix[k][j] << " " << matrix[k][i] << "\n";
-                sum *= matrix[k][j];
-            }
-			//std::cout << sum << "\n";
-            if (sum > max){
-                max = sum;
-            }
-        }
-        
-    }
+    for (int i =0; i < 20; i++){//determines what part of the column to start at
+		for (int k = 0; k < 17; k++){//determines what column to test or which list to use
+			sum = matrix[k][i];
+			for (int j = k + 1; j < k + 4; j++){//determines the product of 4 adjacent numbers
+				sum *= matrix[j][i];
+			}
+
+			if (sum > max){
+				max = sum;
+			}
+		}
+	}
    
    return max;
 }
