@@ -45,8 +45,21 @@ int vertical (int matrix[20][20]){
    return max;
 }
 
-int diagonal (int matrix[20][20]){
-    return 0;
+int posDiagonal (int matrix[20][20]){
+	long long max{0};
+    long long sum{1};
+
+	for (int i = 3; i < 20; i++){
+		for (int k = i; k < )
+	}
+
+    return max;
+}
+
+int negDiagonal (int matrix[20][20]){
+	long long max{0};
+    long long sum{1};
+    return max;
 }
 
 int main(){
