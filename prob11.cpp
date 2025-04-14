@@ -50,7 +50,9 @@ int posDiagonal (int matrix[20][20]){
     long long sum{1};
 
 	for (int i = 3; i < 20; i++){
-		for (int k = i; k < )
+		for (int k = 0; k <= i-3; k++){
+			for (int j = k - 1; j > )
+		}
 	}
 
     return max;
