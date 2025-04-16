@@ -15,6 +15,9 @@ bool isCoprime(unsigned long long a, unsigned long long b){
 
 bool probablePrime(mpz_class n, unsigned long long longn){
     bool isPrime = true;
+    float powResult{0};
+    unsigned long long prevS{0};
+    unsigned long long prevD{0};
     unsigned long long s{0};
     unsigned long long d{0};
     unsigned long long a{0};
@@ -25,18 +28,22 @@ bool probablePrime(mpz_class n, unsigned long long longn){
     std::uniform_int_distribution<> distrib(2, longn-2);
 
     //Step 1 find 2^s * d
-    while (true){
-        for (s = 1; s < (int)log2(longn-1); s++){
-            for (d = 1; pow(2, s) * d <= longn-1; d++){
-                if (pow(2, s) * d == longn - 1){
-                    if (std::floor(pow(2,s) * d) ==  )
-                        goto end_loops;
-                }
-            }
+
+    for (s = 1; s < (int)log2(longn-1); s++){
+        powResult = (longn -1)/ pow(2, s);
+        std::cout << s << " " << d << " " << powResult << "\n";
+        if (std::floor(powResult) == powResult){
+            prevS = s;
+            prevD = powResult;
+        }
+        else {
+            s = prevS;
+            d = prevD;
+            goto end_loops;
         }
     }
-    end_loops:
 
+    end_loops:
     for (int i = 0; i < 2; i++){
         a = distrib(gen);
         test1 = pow(a, d);
@@ -55,6 +62,6 @@ bool probablePrime(mpz_class n, unsigned long long longn){
 
 int main(){
     //probablePrime(221,221);
-    std::cout << probablePrime(561,561);
+    std::cout << probablePrime(221,221);
     return 0;
 }
