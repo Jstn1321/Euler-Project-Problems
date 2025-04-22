@@ -4,6 +4,7 @@
 #include <random>
 #include <gmpxx.h>
 #include <cstdlib>
+#include <list>
 
 bool isCoprime(unsigned long long a, unsigned long long b){
     bool isCoprime = false;
@@ -22,6 +23,7 @@ bool probablePrime(mpz_class n, unsigned long long longn){
     unsigned long long d{0};
     unsigned long long a{0};
     unsigned long long test1{0};
+    std::list<int> testA {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41};
 
     std::random_device rd;  // a seed source for the random number engine
     std::mt19937 gen(rd()); // mersenne_twister_engine seeded with rd()
