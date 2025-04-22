@@ -32,11 +32,33 @@ bool probablePrime(mpz_class n, unsigned long long longn){
     unsigned long long d{0};
     unsigned long long a{0};
     unsigned long long test1{0};
-    std::list<int> testA {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41};
+    std::list<int> testA {0};
+    mpz_class temp{0};
 
-    std::random_device rd;  // a seed source for the random number engine
-    std::mt19937 gen(rd()); // mersenne_twister_engine seeded with rd()
-    std::uniform_int_distribution<> distrib(2, longn-2);
+    if (n < 2047){
+        testA = {2};
+    }
+    else if (longn < 1373653){
+        testA = {2, 3};
+    }
+    else if (longn < 25326001){
+        testA = {2, 3, 5};
+    }
+    else if (longn < 118670087467){
+        testA = {2, 3, 5, 7};
+    }
+    else if (longn < 2152302898747){
+        testA = {2, 3, 5, 7, 11};
+    }
+    else if (longn < 3474749660383){
+        testA = {2, 3, 5, 7, 11, 13};
+    }
+    else if (longn < 341550071728321){
+        testA = {2, 3, 5, 7, 11, 13, 17};
+    }
+    else {
+        testA = {2, 3, 5, 7, 11, 13, 17};
+    }
 
     //Step 1 find 2^s * d
 
@@ -55,17 +77,7 @@ bool probablePrime(mpz_class n, unsigned long long longn){
     }
 
     end_loops:
-    for (int i = 0; i < 2; i++){
-        a = distrib(gen);
-        test1 = pow(a, d);
-        test1 %= longn;
-        if(test1 != 1){
-            isPrime = false;
-            break;
-        }
-        
-    }
-
+    
     std::cout << s << " " << d << "\n";
     return isPrime;
 }
@@ -73,6 +85,6 @@ bool probablePrime(mpz_class n, unsigned long long longn){
 
 int main(){
     //probablePrime(221,221);
-    std::cout << probablePrime(221,221);
+    std::cout << probablePrime(221,221) << std::endl;
     return 0;
 }
