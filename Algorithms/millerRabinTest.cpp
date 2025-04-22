@@ -14,6 +14,15 @@ bool isCoprime(unsigned long long a, unsigned long long b){
     return isCoprime;
 }
 
+mpz_class modExp(mpz_class base, mpz_class exp, mpz_class mod){
+    mpz_class result{1};
+    for (int i = 0; i < exp; i++){
+        result *= base;
+    }
+    result %= mod;
+    return result;
+}
+
 bool probablePrime(mpz_class n, unsigned long long longn){
     bool isPrime = true;
     float powResult{0};
